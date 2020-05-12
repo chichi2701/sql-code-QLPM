@@ -1,11 +1,11 @@
-create database QLPhongMay
+﻿create database QLPhongMay
 use QLPhongMay
 
 create table MAYTINH
 (
 	maMT varchar(30) NOT NULL primary key,
 	tenMT nvarchar(30),
-	ngaynhap datetime,
+	ngaynhap date,
 	tinhtrang nvarchar(30),
 )
 create table PHONGMAY
@@ -14,7 +14,7 @@ create table PHONGMAY
 	maMT varchar(30) NOT NULL,
 	tenPM nvarchar(30),
 	diadiemPM nvarchar(30),
-	ngaytruc datetime,
+	ngaytruc date,
 	noidungtruc nvarchar(30),
 	constraint FK_PHONGMAY_MAYTINH foreign key(maMT) references MAYTINH(maMT),
 )
@@ -23,7 +23,7 @@ create table NHANVIEN
 	maNV varchar(30) NOT NULL primary key,
 	maPM varchar(30) NOT NULL,
 	tenNV nvarchar(30),
-	ngaysinhNV datetime,
+	ngaysinhNV date,
 	gioitinhNV nvarchar(10),
 	diachiNV nvarchar(30),
 	constraint FK_NHANVIEN_PHONGMAY foreign key(maPM) references PHONGMAY(maPM),
@@ -32,7 +32,7 @@ create table SINHVIEN
 (
 	maSV varchar(30)  NOT NULL primary key,
 	hotenSV nvarchar(30),
-	ngaysinhSV datetime,
+	ngaysinhSV date,
 	gioitinhSV nvarchar(10),
 	diachiSV nvarchar(30),
 )
@@ -48,7 +48,7 @@ create table GIAOVIEN
 	maGV varchar(30) NOT NULL primary key,
 	maLHP varchar(30) NOT NULL,
 	hotenGV nvarchar(30),
-	ngaysinhGV datetime,
+	ngaysinhGV date,
 	gioitinhGV nvarchar(10),
 	diachiGV nvarchar(30),
 	constraint FK_GIAOVIEN_LOPHOCPHAN foreign key(maLHP) references LOPHOCPHAN(maLHP),
@@ -57,7 +57,7 @@ create table LICHTHUCHANH
 (
 	maLTH varchar(30) NOT NULL primary key,
 	maGV varchar(30) NOT NULL,
-	ngayTH datetime,
+	ngayTH date,
 	noidungTH nvarchar(30),
 	constraint FK_LICHTHUCHANH_GIAOVIEN foreign key(maGV) references GIAOVIEN(maGV),
 )
@@ -94,3 +94,23 @@ create table CT_LOPHOCPHAN
 	constraint FK_CT_LOPHOCPHAN_LHP_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
 	constraint FK_CT_LOPHOCPHAN_SV_FK foreign key(maSV) references SINHVIEN(maSV),
 )
+
+/*DATA*/
+-----------------------------------------------
+/*MAYTINH*/
+insert into MAYTINH values ('M01',N'MÁY 01','2018-12-21',N'TỐT')
+
+/*PHONGMAY*/
+insert into PHONGMAY values ('PM01','M01',N'MÁY 01',N'PHÒNG MÁY 01','2020-05-13',N'CA 01')
+
+
+/**/
+
+-----------------------------------------------
+
+/*T-SQL*/
+
+
+/*DROP DATABASE*/
+use master
+drop database QLPhongMay
