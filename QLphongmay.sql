@@ -41,8 +41,7 @@ create table LOPHOCPHAN
 	maLHP varchar(30) NOT NULL primary key,
 	maSV varchar(30) NOT NULL,
 	tenLHP nvarchar(30),
-	tenHP nvarchar(30),
-	constraint FK_LOPHOCPHAN_SINHVIEN foreign key(maSV) references SINHVIEN(maSV), 
+	tenHP nvarchar(30), 
 )
 create table GIAOVIEN
 (
@@ -89,7 +88,9 @@ create table CT_GIAOVIEN
 create table CT_LOPHOCPHAN
 (
 	maLHP varchar(30) NOT NULL,
+	maSV varchar(30)  NOT NULL,
 	hotenSV nvarchar(30),
-	constraint PK_CT_LOPHOCPHAN_SINHVIEN primary key(maLHP),
-	constraint FK_CT_LOPHOCPHAN_SINHVIEN foreign key(maLHP) references LOPHOCPHAN(maLHP),
+	constraint PK_CT_LOPHOCPHAN_SINHVIEN primary key(maLHP,maSV),
+	constraint FK_CT_LOPHOCPHAN_LHP_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
+	constraint FK_CT_LOPHOCPHAN_SV_FK foreign key(maSV) references SINHVIEN(maSV),
 )
