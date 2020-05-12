@@ -1,6 +1,9 @@
-﻿create database QLPhongMay
+﻿/*CREATE DATABASE*/
+create database QLPhongMay
+/*USE DATABASE*/
 use QLPhongMay
-
+/*CREATE TABLE*/
+-------------------------------------------------------
 create table MAYTINH
 (
 	maMT varchar(30) NOT NULL primary key,
@@ -94,17 +97,46 @@ create table CT_LOPHOCPHAN
 	constraint FK_CT_LOPHOCPHAN_LHP_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
 	constraint FK_CT_LOPHOCPHAN_SV_FK foreign key(maSV) references SINHVIEN(maSV),
 )
+----------------------------------------------------------------------
 
 /*DATA*/
 -----------------------------------------------
-/*MAYTINH*/
+--MAYTINH--
 insert into MAYTINH values ('M01',N'MÁY 01','2018-12-21',N'TỐT')
+insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT')
+insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT')
+insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM')
+insert into MAYTINH values ('M05',N'MÁY 05','2018-05-13',N'TỐT')
 
-/*PHONGMAY*/
+--PHONGMAY--
 insert into PHONGMAY values ('PM01','M01',N'MÁY 01',N'PHÒNG MÁY 01','2020-05-13',N'CA 01')
 
+--NHANVIEN--
+insert into NHANVIEN values()
 
-/**/
+--LOPHOCPHAN--
+insert into LOPHOCPHAN values()
+
+--SINHVIEN--
+insert into SINHVIEN values()
+
+--CT_LOPHOCPHAN--
+insert into LOPHOCPHAN values()
+
+--GIAOVIEN--
+insert into GIAOVIEN values()
+
+--CT_GIAOVIEN--
+insert into CT_GIAOVIEN values()
+
+--LICHHUCHANH--
+insert into LICHTHUCHANH values()
+
+--CT_LICHTHUCHANH--
+insert into CT_LICHTHUCHANH values()
+
+--CHITIETTHUCHANH--
+insert into CHITIETTHUCHANH values()
 
 -----------------------------------------------
 
