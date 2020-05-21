@@ -14,21 +14,21 @@ create table MAYTINH
 create table PHONGMAY
 (
 	maPM varchar(30) NOT NULL primary key,
-	maMT varchar(30) NOT NULL,
 	tenPM nvarchar(30),
 	diadiemPM nvarchar(30),
 	ngaytruc date,
 	noidungtruc nvarchar(30),
+	maMT varchar(30) NOT NULL,
 	constraint FK_PHONGMAY_MAYTINH foreign key(maMT) references MAYTINH(maMT),
 )
 create table NHANVIEN
 (
 	maNV varchar(30) NOT NULL primary key,
-	maPM varchar(30) NOT NULL,
 	tenNV nvarchar(30),
 	ngaysinhNV date,
 	gioitinhNV nvarchar(10),
 	diachiNV nvarchar(30),
+	maPM varchar(30) NOT NULL,
 	constraint FK_NHANVIEN_PHONGMAY foreign key(maPM) references PHONGMAY(maPM),
 )
 create table SINHVIEN
@@ -42,60 +42,52 @@ create table SINHVIEN
 create table LOPHOCPHAN
 (
 	maLHP varchar(30) NOT NULL primary key,
-	maSV varchar(30) NOT NULL,
 	tenLHP nvarchar(30),
 	tenHP nvarchar(30), 
 )
 create table GIAOVIEN
 (
 	maGV varchar(30) NOT NULL primary key,
-	maLHP varchar(30) NOT NULL,
 	hotenGV nvarchar(30),
 	ngaysinhGV date,
 	gioitinhGV nvarchar(10),
-	diachiGV nvarchar(30),
-	constraint FK_GIAOVIEN_LOPHOCPHAN foreign key(maLHP) references LOPHOCPHAN(maLHP),
+	diachiGV nvarchar(30),	
 )
 create table LICHTHUCHANH
 (
 	maLTH varchar(30) NOT NULL primary key,
-	maGV varchar(30) NOT NULL,
 	ngayTH date,
 	noidungTH nvarchar(30),
-	constraint FK_LICHTHUCHANH_GIAOVIEN foreign key(maGV) references GIAOVIEN(maGV),
-)
-create table CHITIETTHUCHANH
-(
-	maNV varchar(30) NOT NULL,
-	maLTH varchar(30) NOT NULL,
-	gioBD time,
-	gioKT time,
-	constraint CTTH_LICHTHUCHANH_GIAOVIEN primary key(maNV,maLTH),
-	constraint CTTH_NHANVIEN_FK foreign key(maNV) references NHANVIEN(maNV),
-	constraint CTTH_LICHTHUCHANH_FK foreign key(maLTH) references LICHTHUCHANH(maLTH),
 )
 create table CT_LICHTHUCHANH
 (
 	maLTH varchar(30) NOT NULL,
-	hotenGV nvarchar(30),
-	constraint PK_CT_LICHTHUCHANH_GIAOVIEN primary key(maLTH),
-	constraint FK_CT_LICHTHUCHANH_GIAOVIEN foreign key(maLTH) references LICHTHUCHANH(maLTH),
-)
-create table CT_GIAOVIEN
-(
+	ngayTH date,
+	maNV varchar(30) NOT NULL,
+	tenNV nvarchar(30),
 	maGV varchar(30) NOT NULL,
-	tenLHP nvarchar(30),
-	constraint PK_CT_GIAOVIEN_LOPHOCPHAN primary key(maGV),
-	constraint FK_CT_GIAOVIEN_LOPHOCPHAN foreign key(maGV) references GIAOVIEN(maGV),
+	hotenGV nvarchar(30),
+	ca varchar(30),
+	gioBD time,
+	gioKT time,
+	constraint CT_LICHTHUCHANH_PM primary key(maLTH,maNV,maGV),
+	constraint CTLTH_NHANVIEN_FK foreign key(maNV) references NHANVIEN(maNV),
+	constraint CTLTH_LICHTHUCHANH_FK foreign key(maLTH) references LICHTHUCHANH(maLTH),
+	constraint CTLTH_GIAOVIEN_FK foreign key(maGV) references GIAOVIEN(maGV)
 )
-create table CT_LOPHOCPHAN
+
+create table CT_HOCPHAN
 (
 	maLHP varchar(30) NOT NULL,
+	tenLHP nvarchar(30),
+	maGV varchar(30) NOT NULL,
+	hotenGV nvarchar(30),
 	maSV varchar(30)  NOT NULL,
 	hotenSV nvarchar(30),
-	constraint PK_CT_LOPHOCPHAN_SINHVIEN primary key(maLHP,maSV),
-	constraint FK_CT_LOPHOCPHAN_LHP_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
-	constraint FK_CT_LOPHOCPHAN_SV_FK foreign key(maSV) references SINHVIEN(maSV),
+	constraint CT_HOCPHAN_PK primary key(maLHP,maGV,maSV),
+	constraint CTHP_LOPHOCPHAN_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
+	constraint CTHP_GIAOVIEN_FK foreign key(maGV) references GIAOVIEN(maGV),
+	constraint CTHP_SINHVIEN_FK foreign key(maSV) references SINHVIEN(maSV)
 )
 ----------------------------------------------------------------------
 
@@ -120,14 +112,11 @@ insert into LOPHOCPHAN values()
 --SINHVIEN--
 insert into SINHVIEN values()
 
---CT_LOPHOCPHAN--
-insert into LOPHOCPHAN values()
-
 --GIAOVIEN--
 insert into GIAOVIEN values()
 
---CT_GIAOVIEN--
-insert into CT_GIAOVIEN values()
+--CT_HOCPHAN--
+insert into CT_HOCPHAN values()
 
 --LICHHUCHANH--
 insert into LICHTHUCHANH values()
@@ -135,8 +124,6 @@ insert into LICHTHUCHANH values()
 --CT_LICHTHUCHANH--
 insert into CT_LICHTHUCHANH values()
 
---CHITIETTHUCHANH--
-insert into CHITIETTHUCHANH values()
 
 -----------------------------------------------
 
