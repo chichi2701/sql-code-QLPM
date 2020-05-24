@@ -106,6 +106,9 @@ insert into PHONGMAY values ('PM01','M01',N'MÁY 01',N'PHÒNG MÁY 01','2020-05-
 --NHANVIEN--
 insert into NHANVIEN values()
 
+--LICHTHUCHANH--
+insert into LICHTHUCHANH values()
+
 --LOPHOCPHAN--
 insert into LOPHOCPHAN values()
 
@@ -117,9 +120,6 @@ insert into GIAOVIEN values()
 
 --CT_HOCPHAN--
 insert into CT_HOCPHAN values()
-
---LICHHUCHANH--
-insert into LICHTHUCHANH values()
 
 --CT_LICHTHUCHANH--
 insert into CT_LICHTHUCHANH values()
