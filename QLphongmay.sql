@@ -4,22 +4,22 @@ create database QLPhongMay
 use QLPhongMay
 /*CREATE TABLE*/
 -------------------------------------------------------
-create table MAYTINH
-(
-	maMT varchar(30) NOT NULL primary key,
-	tenMT nvarchar(30),
-	ngaynhap date,
-	tinhtrang nvarchar(30),
-)
 create table PHONGMAY
 (
 	maPM varchar(30) NOT NULL primary key,
 	tenPM nvarchar(30),
 	diadiemPM nvarchar(30),
 	ngaytruc date,
-	noidungtruc nvarchar(30),
-	maMT varchar(30) NOT NULL,
-	constraint FK_PHONGMAY_MAYTINH foreign key(maMT) references MAYTINH(maMT),
+	noidungtruc nvarchar(30),	
+)
+create table MAYTINH
+(
+	maMT varchar(30) NOT NULL primary key,
+	tenMT nvarchar(30),
+	ngaynhap date,
+	tinhtrang nvarchar(30),
+	maPM varchar(30) NOT NULL,
+	constraint FK_PHONGMAY_MAYTINH foreign key(maPM) references PHONGMAY(maPM),
 )
 create table NHANVIEN
 (
@@ -62,10 +62,10 @@ create table LICHTHUCHANH
 create table CT_LICHTHUCHANH
 (
 	maLTH varchar(30) NOT NULL,
-	ngayTH date,
 	maNV varchar(30) NOT NULL,
-	tenNV nvarchar(30),
 	maGV varchar(30) NOT NULL,
+	ngayTH date,	
+	tenNV nvarchar(30),	
 	hotenGV nvarchar(30),
 	ca varchar(30),
 	gioBD time,
@@ -79,10 +79,10 @@ create table CT_LICHTHUCHANH
 create table CT_HOCPHAN
 (
 	maLHP varchar(30) NOT NULL,
-	tenLHP nvarchar(30),
 	maGV varchar(30) NOT NULL,
-	hotenGV nvarchar(30),
 	maSV varchar(30)  NOT NULL,
+	tenLHP nvarchar(30),
+	hotenGV nvarchar(30),
 	hotenSV nvarchar(30),
 	constraint CT_HOCPHAN_PK primary key(maLHP,maGV,maSV),
 	constraint CTHP_LOPHOCPHAN_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
@@ -100,6 +100,7 @@ ALTER TABLE PHONGMAY DROP COLumn maMT;
 -----------------------------------------------
 --MAYTINH--
 insert into MAYTINH values ('M01',N'MÁY 01','2018-12-21',N'TỐT','PM01')
+<<<<<<< HEAD
 insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT','PM01')
 insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT','PM01')
 insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM','PM01')
@@ -123,6 +124,15 @@ insert into MAYTINH values ('M020',N'MÁY 20','2018-05-13',N'LỖI PHẦN MỀM'
 --PHONGMAY--
 insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'TẦNG 1','2020-05-13',N'CA 01')
 insert into PHONGMAY values ('PM02',N'PHÒNG MÁY 02',N'TẦNG 2','2020-05-13',N'CA 02')
+=======
+insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT')
+insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT')
+insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM')
+insert into MAYTINH values ('M05',N'MÁY 05','2018-05-13',N'TỐT','PM02')
+
+--PHONGMAY--
+insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'NHÀ H3','2020-05-13',N'TRUC CA 01')
+>>>>>>> 3002378081f803518cb6383d29b67ed81c631e71
 
 --NHANVIEN--
 INSERT INTO NHANVIEN
