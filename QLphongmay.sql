@@ -4,22 +4,23 @@ create database QLPhongMay
 use QLPhongMay
 /*CREATE TABLE*/
 -------------------------------------------------------
-create table MAYTINH
-(
-	maMT varchar(30) NOT NULL primary key,
-	tenMT nvarchar(30),
-	ngaynhap date,
-	tinhtrang nvarchar(30),
-)
+
 create table PHONGMAY
 (
 	maPM varchar(30) NOT NULL primary key,
 	tenPM nvarchar(30),
 	diadiemPM nvarchar(30),
 	ngaytruc date,
-	noidungtruc nvarchar(30),
-	maMT varchar(30) NOT NULL,
-	constraint FK_PHONGMAY_MAYTINH foreign key(maMT) references MAYTINH(maMT),
+	noidungtruc nvarchar(30),	
+)
+create table MAYTINH
+(
+	maMT varchar(30) NOT NULL primary key,
+	tenMT nvarchar(30),
+	ngaynhap date,
+	tinhtrang nvarchar(30),
+	maPM varchar(30) NOT NULL,
+	constraint FK_PHONGMAY_MAYTINH foreign key(maPM) references PHONGMAY(maPM),
 )
 create table NHANVIEN
 (
