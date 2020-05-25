@@ -63,10 +63,10 @@ create table LICHTHUCHANH
 create table CT_LICHTHUCHANH
 (
 	maLTH varchar(30) NOT NULL,
-	ngayTH date,
 	maNV varchar(30) NOT NULL,
-	tenNV nvarchar(30),
 	maGV varchar(30) NOT NULL,
+	ngayTH date,	
+	tenNV nvarchar(30),	
 	hotenGV nvarchar(30),
 	ca varchar(30),
 	gioBD time,
@@ -80,10 +80,10 @@ create table CT_LICHTHUCHANH
 create table CT_HOCPHAN
 (
 	maLHP varchar(30) NOT NULL,
-	tenLHP nvarchar(30),
 	maGV varchar(30) NOT NULL,
-	hotenGV nvarchar(30),
 	maSV varchar(30)  NOT NULL,
+	tenLHP nvarchar(30),
+	hotenGV nvarchar(30),
 	hotenSV nvarchar(30),
 	constraint CT_HOCPHAN_PK primary key(maLHP,maGV,maSV),
 	constraint CTHP_LOPHOCPHAN_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
