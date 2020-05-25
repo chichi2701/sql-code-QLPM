@@ -88,43 +88,193 @@ create table CT_HOCPHAN
 	constraint CTHP_LOPHOCPHAN_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
 	constraint CTHP_GIAOVIEN_FK foreign key(maGV) references GIAOVIEN(maGV),
 	constraint CTHP_SINHVIEN_FK foreign key(maSV) references SINHVIEN(maSV)
+
+
 )
+ALTER TABLE MAYTINH
+ADD maPM varchar(30)
+ALTER TABLE PHONGMAY DROP COLumn maMT;
 ----------------------------------------------------------------------
 
 /*DATA*/
 -----------------------------------------------
 --MAYTINH--
-insert into MAYTINH values ('M01',N'MÁY 01','2018-12-21',N'TỐT')
-insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT')
-insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT')
-insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM')
-insert into MAYTINH values ('M05',N'MÁY 05','2018-05-13',N'TỐT')
+insert into MAYTINH values ('M01',N'MÁY 01','2018-12-21',N'TỐT','PM01')
+insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT','PM01')
+insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT','PM01')
+insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM','PM01')
+insert into MAYTINH values ('M05',N'MÁY 05','2018-05-13',N'TỐT','PM01')
+insert into MAYTINH values ('M06',N'MÁY 06','2018-05-13',N'TỐT','PM01')
+insert into MAYTINH values ('M07',N'MÁY 07','2018-05-13',N'TỐT','PM01')
+insert into MAYTINH values ('M08',N'MÁY 08','2018-05-13',N'TỐT','PM01')
+insert into MAYTINH values ('M09',N'MÁY 09','2018-05-13',N'TỐT','PM01')
+insert into MAYTINH values ('M010',N'MÁY 10','2018-05-13',N'TỐT','PM01')
+insert into MAYTINH values ('M011',N'MÁY 11','2018-05-13',N'TỐT','PM01')
+insert into MAYTINH values ('M012',N'MÁY 12','2018-05-13',N'TỐT','PM02')
+insert into MAYTINH values ('M013',N'MÁY 13','2018-05-13',N'TỐT','PM02')
+insert into MAYTINH values ('M014',N'MÁY 14','2018-05-13',N'TỐT','PM02')
+insert into MAYTINH values ('M015',N'MÁY 15','2018-05-13',N'TỐT','PM02')
+insert into MAYTINH values ('M016',N'MÁY 16','2018-05-13',N'TỐT','PM02')
+insert into MAYTINH values ('M017',N'MÁY 17','2018-05-13',N'TỐT','PM02')
+insert into MAYTINH values ('M018',N'MÁY 18','2018-05-13',N'LỖI PHẦN MỀM','PM02')
+insert into MAYTINH values ('M019',N'MÁY 19','2018-05-13',N'LỖI PHẦN MỀM','PM02')
+insert into MAYTINH values ('M020',N'MÁY 20','2018-05-13',N'LỖI PHẦN MỀM','PM02')
 
 --PHONGMAY--
-insert into PHONGMAY values ('PM01','M01',N'MÁY 01',N'PHÒNG MÁY 01','2020-05-13',N'CA 01')
+insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'TẦNG 1','2020-05-13',N'CA 01')
+insert into PHONGMAY values ('PM02',N'PHÒNG MÁY 02',N'TẦNG 2','2020-05-13',N'CA 02')
 
 --NHANVIEN--
-insert into NHANVIEN values()
+INSERT INTO NHANVIEN
+VALUES('NV01',N'Nuyễn Thị Trang','1987-4-4',N'Nữ',N'Hà Nội','PM01')
+INSERT INTO NHANVIEN
+VALUES('NV02',N'Nguyễn Thanh Thảo','1987-11-1',N'Nữ',N'Hà Nội','PM02')
 
---LICHTHUCHANH--
-insert into LICHTHUCHANH values()
+
 
 --LOPHOCPHAN--
-insert into LOPHOCPHAN values()
+INSERT INTO LOPHOCPHAN
+VALUES('LHP01','KL1',N'Thực Tập Kỹ Thuật Lập Trình')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP02','KL2',N'Thực Tập Kỹ Thuật Lập Trình')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP03','KL3',N'Thực Tập Kỹ Thuật Lập Trình')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP04','KL4',N'Thực Tập Kỹ Thuật Lập Trình')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP05','CD1',N'Thực Tập Cơ Sở Dữ Liệu')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP06','CD2',N'Thực Tập Cơ Sở Dữ Liệu')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP07','CD3',N'Thực Tập Cơ Sở Dữ Liệu')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP08','CD4',N'Thực Tập Cơ Sở Dữ Liệu')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP09','IT1',N'Thực Tập Công Nghệ Thông Tin')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP10','IT2',N'Thực Tập Công Nghệ Thông Tin')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP11','IT3',N'Thực Tập Công Nghệ Thông Tin')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP12','IT4',N'Thực Tập Công Nghệ Thông Tin')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP13','NN11',N'Ngôn Ngữ Lập Trình 1')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP14','NN12',N'Ngôn Ngữ Lập Trình 1')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP15','NN13',N'Ngôn Ngữ Lập Trình 1')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP16','NN14',N'Ngôn Ngữ Lập Trình 1')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP17','NN21',N'Ngôn Ngữ Lập Trình 2')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP18','NN22',N'Ngôn Ngữ Lập Trình 2')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP19','NN23','Ngon Ngu Lap Trinh 2')
+INSERT INTO LOPHOCPHAN
+VALUES('LHP20','NN24','Ngon Ngu Lap Trinh 2')
 
 --SINHVIEN--
-insert into SINHVIEN values()
+INSERT INTO SINHVIEN
+VALUES('SV01',N'Nguyễn Thị Nhạn','1998-4-20',N'Nữ',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV02',N'Nguyễn Đức Trung','1997-12-1',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV03',N'Nguyễn Sỹ Hoài Nam','1995-3-22',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV04',N'Trịnh Minh Vũ','1995-10-22',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV05',N'Phạm Tiến Dũng','1998-9-9',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV06',N'Trương Nhật Minh','1997-4-4',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV07',N'Nguyễn Thanh Tùng','1997-11-1',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV08',N'Phạm Văn Khánh','1993-12-1',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV09',N'Hoàng Ngọc Kim Oanh','1994-12-1',N'Nữ',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV10',N'Nghiêm Thu Huyền','1993-2-4',N'Nữ',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV11',N'Nguyễn Hải Thanh','1992-12-12',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV12',N'Vũ Mỹ Dung','1992-7-7',N'Nữ',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV13',N'Nguyễn Mạnh Hùng','1994-12-11',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV14',N'Phạm Việt Hùng','1997-11-12',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV15',N'Hoàng Văn Toàn','1999-12-10',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV16',N'Lù Thị Yên','1997-10-10',N'Nữ',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV17',N'Mai Quang Dũng','1999-3-3',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV18',N'Nguyễn Anh Tuấn','1999-6-12',N'Nam',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV19',N'Trần Hồng Minh','1999-9-8',N'Nữ',N'Hà Nội')
+INSERT INTO SINHVIEN
+VALUES('SV20',N'Bùi Thị Lịch','1994-10-10',N'Nữ',N'Hà Nội')
 
+----Sua Thong Tin Sinh Vien----
+UPDATE SINHVIEN
+SET diachiSV=N'Bắc Ninh'
+WHERE hotenSV=N'Nguyễn Thị Nhạn'
+UPDATE SINHVIEN
+SET diachiSV=N'Hải Dương'
+WHERE hotenSV=N'Phạm Tiến Dũng'
+UPDATE SINHVIEN
+SET diachiSV=N'Hà Giang'
+WHERE hotenSV=N'Hoàng Văn Toàn'
+UPDATE SINHVIEN
+SET diachiSV=N'Hà Giang'
+WHERE hotenSV=N'Lù Thị Yên'
+UPDATE SINHVIEN
+SET diachiSV=N'Nghệ An'
+WHERE hotenSV=N'Bùi Thị Lịch'
+UPDATE SINHVIEN
+SET diachiSV=N'Mộc Châu'
+WHERE hotenSV=N'Mai Quang Dũng'
 --GIAOVIEN--
-insert into GIAOVIEN values()
+INSERT INTO GIAOVIEN
+VALUES('GV01',N'Nguyễn Tuấn Anh','1988-4-20',N'Nam',N'Hà Nội')
+INSERT INTO GIAOVIEN
+VALUES('GV02',N'Trần Thành Đạt','1985-12-1',N'Nam',N'Hà Nội')
+INSERT INTO GIAOVIEN
+VALUES('GV03',N'Phạm Văn Hoàng','1985-3-22',N'Nam',N'Hà Nội')
+INSERT INTO GIAOVIEN
+VALUES('GV04',N'Nguyễn Tiến Thành','1984-10-22',N'Nam',N'Hà Nội')
+INSERT INTO GIAOVIEN
+VALUES('GV05',N'Nguyễn Thế Vũ','1998-9-9',N'Nam',N'Ninh Bình')
+INSERT INTO GIAOVIEN
+VALUES('GV06',N'Phan Ngọc Huy','1987-4-4',N'Nam',N'Hà Nội')
 
 --CT_HOCPHAN--
-insert into CT_HOCPHAN values()
+INSERT INTO CT_HOCPHAN
+VALUES
+
+--LICHTHUCHANH--
+INSERT INTO LICHTHUCHANH 
+values('TH1','2020-4-4',N'Bài Tập Thực Hành 1')
+INSERT INTO LICHTHUCHANH 
+values('TH2','2020-4-4',N'Bài Tập Thực Hành 2')
+INSERT INTO LICHTHUCHANH 
+values('TH3','2020-4-4',N'Bài Tập Thực Hành 3')
+
+
 
 --CT_LICHTHUCHANH--
 insert into CT_LICHTHUCHANH values()
+---------------------------------------------------------------------------------------------
+---KHAI THAC DU LIEU---
 
+SELECT* FROM SINHVIEN WHERE diachiSV ='Ha Noi'
 
+SELECT SINHVIEN.hotenSV FROM SINHVIEN,CT_LOPHOCPHAN,LOPHOCPHAN
+WHERE CT_LOPHOCPHAN.maLHP = LOPHOCPHAN.maLHP AND LOPHOCPHAN.tenLHP = 'KL1' AND  CT_LOPHOCPHAN.maSV = SINHVIEN.maSV
+
+SELECT LOPHOCPHAN.tenLHP,LOPHOCPHAN.tenHP FROM SINHVIEN,CT_LOPHOCPHAN,LOPHOCPHAN
+WHERE CT_LOPHOCPHAN.maLHP = LOPHOCPHAN.maLHP AND CT_LOPHOCPHAN.maSV = SINHVIEN.maSV AND SINHVIEN.hotenSV = 'Nguyen Duc Trung'
 -----------------------------------------------
 
 /*T-SQL*/
