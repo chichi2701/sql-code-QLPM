@@ -98,9 +98,13 @@ ALTER TABLE PHONGMAY DROP COLumn maMT;
 
 /*DATA*/
 -----------------------------------------------
+
+--PHONGMAY--
+insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'TẦNG 1','2020-05-13',N'CA 01')
+insert into PHONGMAY values ('PM02',N'PHÒNG MÁY 02',N'TẦNG 2','2020-05-13',N'CA 02')
+
 --MAYTINH--
 insert into MAYTINH values ('M01',N'MÁY 01','2018-12-21',N'TỐT','PM01')
-<<<<<<< HEAD
 insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT','PM01')
 insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT','PM01')
 insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM','PM01')
@@ -121,17 +125,6 @@ insert into MAYTINH values ('M018',N'MÁY 18','2018-05-13',N'LỖI PHẦN MỀM'
 insert into MAYTINH values ('M019',N'MÁY 19','2018-05-13',N'LỖI PHẦN MỀM','PM02')
 insert into MAYTINH values ('M020',N'MÁY 20','2018-05-13',N'LỖI PHẦN MỀM','PM02')
 
---PHONGMAY--
-insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'TẦNG 1','2020-05-13',N'CA 01')
-insert into PHONGMAY values ('PM02',N'PHÒNG MÁY 02',N'TẦNG 2','2020-05-13',N'CA 02')
-=======
-insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT')
-insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT')
-insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM')
-insert into MAYTINH values ('M05',N'MÁY 05','2018-05-13',N'TỐT','PM02')
-
---PHONGMAY--
-insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'NHÀ H3','2020-05-13',N'TRUC CA 01')
 
 
 --NHANVIEN--
