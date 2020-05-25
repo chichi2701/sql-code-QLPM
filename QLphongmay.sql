@@ -10,7 +10,8 @@ create table PHONGMAY
 	tenPM nvarchar(30),
 	diadiemPM nvarchar(30),
 	ngaytruc date,
-	noidungtruc nvarchar(30),	
+	noidungtruc nvarchar(30),
+	
 )
 create table MAYTINH
 (
@@ -18,9 +19,10 @@ create table MAYTINH
 	tenMT nvarchar(30),
 	ngaynhap date,
 	tinhtrang nvarchar(30),
-	maPM varchar(30) NOT NULL,
-	constraint FK_PHONGMAY_MAYTINH foreign key(maPM) references PHONGMAY(maPM),
+	maPM varchar(30),
+	constraint FK_MAYTINH_PHONGMAY foreign key(maPM) references PHONGMAY(maPM),
 )
+
 create table NHANVIEN
 (
 	maNV varchar(30) NOT NULL primary key,
@@ -91,16 +93,16 @@ create table CT_HOCPHAN
 
 
 )
-ALTER TABLE MAYTINH
-ADD maPM varchar(30)
-ALTER TABLE PHONGMAY DROP COLumn maMT;
+
 ----------------------------------------------------------------------
 
 /*DATA*/
 -----------------------------------------------
+--PHONGMAY--
+insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'TẦNG 1','2020-05-13',N'CA 01')
+insert into PHONGMAY values ('PM02',N'PHÒNG MÁY 02',N'TẦNG 2','2020-05-13',N'CA 02')
 --MAYTINH--
 insert into MAYTINH values ('M01',N'MÁY 01','2018-12-21',N'TỐT','PM01')
-<<<<<<< HEAD
 insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT','PM01')
 insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT','PM01')
 insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM','PM01')
@@ -120,19 +122,6 @@ insert into MAYTINH values ('M017',N'MÁY 17','2018-05-13',N'TỐT','PM02')
 insert into MAYTINH values ('M018',N'MÁY 18','2018-05-13',N'LỖI PHẦN MỀM','PM02')
 insert into MAYTINH values ('M019',N'MÁY 19','2018-05-13',N'LỖI PHẦN MỀM','PM02')
 insert into MAYTINH values ('M020',N'MÁY 20','2018-05-13',N'LỖI PHẦN MỀM','PM02')
-
---PHONGMAY--
-insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'TẦNG 1','2020-05-13',N'CA 01')
-insert into PHONGMAY values ('PM02',N'PHÒNG MÁY 02',N'TẦNG 2','2020-05-13',N'CA 02')
-=======
-insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT')
-insert into MAYTINH values ('M03',N'MÁY 03','2018-06-25',N'TỐT')
-insert into MAYTINH values ('M04',N'MÁY 04','2018-12-15',N'LỖI PHẦN MỀM')
-insert into MAYTINH values ('M05',N'MÁY 05','2018-05-13',N'TỐT','PM02')
-
---PHONGMAY--
-insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'NHÀ H3','2020-05-13',N'TRUC CA 01')
-
 
 --NHANVIEN--
 INSERT INTO NHANVIEN
@@ -258,10 +247,42 @@ INSERT INTO GIAOVIEN
 VALUES('GV05',N'Nguyễn Thế Vũ','1998-9-9',N'Nam',N'Ninh Bình')
 INSERT INTO GIAOVIEN
 VALUES('GV06',N'Phan Ngọc Huy','1987-4-4',N'Nam',N'Hà Nội')
-
+/*Sủa phần này*/
 --CT_HOCPHAN--
 INSERT INTO CT_HOCPHAN
-VALUES
+VALUES ('LHP01','GV01','SV01','KL1',N'Nguyễn Tuấn Anh',N'Nguyễn Thị Nhạn')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP01','GV01','SV02','KL1',N'Nguyễn Tuấn Anh',N'Nguyễn Đức Trung')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP01','GV01','SV03','KL1',N'Nguyễn Tuấn Anh',N'Nguyễn Sỹ Hoài Nam')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP01','GV01','SV04','KL1',N'Nguyễn Tuấn Anh',N'Trịnh Minh Vũ')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP01','GV01','SV05','KL1',N'Nguyễn Tuấn Anh',N'Phạm Tiến Dũng')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP02','GV02','SV06','KL2',N'Trần Thành Đạt',N'Trương Nhật Minh')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP02','GV02','SV07','KL2',N'Trần Thành Đạt',N'Nguyễn Thanh Tùng')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP02','GV02','SV08','KL2',N'Trần Thành Đạt',N'Phạm Văn Khánh')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP02','GV02','SV09','KL2',N'Trần Thành Đạt',N'Hoàng Ngọc Kim Oanh')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP02','GV02','SV10','KL2',N'Trần Thành Đạt',N'Nghiêm Thu Huyền')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP05','GV03','SV01','CD1',N'Phạm Văn Hoàng',N'Nguyễn Thị Nhạn')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP05','GV03','SV03','CD1',N'Phạm Văn Hoàng',N'Nguyễn Sỹ Hoài Nam')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP05','GV03','SV05','CD1',N'Phạm Văn Hoàng',N'Phạm Tiến Dũng')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP05','GV03','SV07','CD1',N'Phạm Văn Hoàng',N'Nguyễn Thanh Tùng')
+INSERT INTO CT_HOCPHAN
+VALUES ('LHP05','GV03','SV09','CD1',N'Phạm Văn Hoàng',N'Hoàng Ngọc Kim Oanh')
+
+
+
+
 
 --LICHTHUCHANH--
 INSERT INTO LICHTHUCHANH 
@@ -272,19 +293,28 @@ INSERT INTO LICHTHUCHANH
 values('TH3','2020-4-4',N'Bài Tập Thực Hành 3')
 
 
-
+/*ủa phần này*/ 
 --CT_LICHTHUCHANH--
-insert into CT_LICHTHUCHANH values()
+INSERT INTO CT_LICHTHUCHANH 
+values('TH1','NV01','GV01','2020-4-4',N'Nuyễn Thị Trang',N'Nguyễn Tuấn Anh','Ca 1','07:00:00','09:30:00')
+INSERT INTO CT_LICHTHUCHANH 
+values('TH2','NV01','GV02','2020-4-4',N'Nuyễn Thị Trang',N'Trần Thành Đạt','Ca 1','07:00:00','09:30:00')
+INSERT INTO CT_LICHTHUCHANH 
+values('TH3','NV02','GV03','2020-4-4',N'Nguyễn Thanh Thảo',N'Phạm Văn Hoàng','Ca 2','09:30:00','12:00:00')
+
+
+
+
 ---------------------------------------------------------------------------------------------
 ---KHAI THAC DU LIEU---
-
-SELECT* FROM SINHVIEN WHERE diachiSV ='Ha Noi'
-
-SELECT SINHVIEN.hotenSV FROM SINHVIEN,CT_LOPHOCPHAN,LOPHOCPHAN
-WHERE CT_LOPHOCPHAN.maLHP = LOPHOCPHAN.maLHP AND LOPHOCPHAN.tenLHP = 'KL1' AND  CT_LOPHOCPHAN.maSV = SINHVIEN.maSV
-
-SELECT LOPHOCPHAN.tenLHP,LOPHOCPHAN.tenHP FROM SINHVIEN,CT_LOPHOCPHAN,LOPHOCPHAN
-WHERE CT_LOPHOCPHAN.maLHP = LOPHOCPHAN.maLHP AND CT_LOPHOCPHAN.maSV = SINHVIEN.maSV AND SINHVIEN.hotenSV = 'Nguyen Duc Trung'
+--In ra nhung hoc sinh den tu HN--
+SELECT* FROM SINHVIEN WHERE diachiSV =N'Hà Nội'
+--In ra nhung hoc sinh hoc lop Ky thuat lap trinh KL1--
+SELECT SINHVIEN.hotenSV FROM SINHVIEN,CT_HOCPHAN,LOPHOCPHAN
+WHERE CT_HOCPHAN.maLHP = LOPHOCPHAN.maLHP AND LOPHOCPHAN.tenLHP = 'KL1' AND  CT_HOCPHAN.maSV = SINHVIEN.maSV
+--In ra nhung hoc sinh hoc lop hoc cua hoc sinh ten Nguyen Thi Nhan--
+SELECT LOPHOCPHAN.tenLHP,LOPHOCPHAN.tenHP FROM SINHVIEN,CT_HOCPHAN,LOPHOCPHAN
+WHERE CT_HOCPHAN.maLHP = LOPHOCPHAN.maLHP AND CT_HOCPHAN.maSV = SINHVIEN.maSV AND SINHVIEN.hotenSV = N'Nguyễn Thị Nhạn'
 -----------------------------------------------
 
 /*T-SQL*/
