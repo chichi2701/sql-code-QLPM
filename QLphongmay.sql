@@ -1,18 +1,15 @@
-﻿/*CREATE DATABASE*/
-create database QLPhongMay
-/*USE DATABASE*/
+﻿create database QLPhongMay
+go
 use QLPhongMay
-/*CREATE TABLE*/
+go
 -------------------------------------------------------
 create table PHONGMAY
 (
 	maPM varchar(30) NOT NULL primary key,
 	tenPM nvarchar(30),
-	diadiemPM nvarchar(30),
-	ngaytruc date,
-	noidungtruc nvarchar(30),
-	
+	diadiemPM nvarchar(30),	
 )
+go
 create table MAYTINH
 (
 	maMT varchar(30) NOT NULL primary key,
@@ -22,46 +19,51 @@ create table MAYTINH
 	maPM varchar(30),
 	constraint FK_MAYTINH_PHONGMAY foreign key(maPM) references PHONGMAY(maPM),
 )
-
+go
 create table NHANVIEN
 (
 	maNV varchar(30) NOT NULL primary key,
 	tenNV nvarchar(30),
 	ngaysinhNV date,
-	gioitinhNV nvarchar(10),
+	gioitinhNV nvarchar(3) check(gioitinhNV in('Nam',N'Nữ')),
 	diachiNV nvarchar(30),
 	maPM varchar(30) NOT NULL,
 	constraint FK_NHANVIEN_PHONGMAY foreign key(maPM) references PHONGMAY(maPM),
 )
+go
 create table SINHVIEN
 (
 	maSV varchar(30)  NOT NULL primary key,
 	hotenSV nvarchar(30),
 	ngaysinhSV date,
-	gioitinhSV nvarchar(10),
+	gioitinhSV nvarchar(3) check(gioitinhSV in('Nam',N'Nữ')),
 	diachiSV nvarchar(30),
 )
+go
 create table LOPHOCPHAN
 (
 	maLHP varchar(30) NOT NULL primary key,
 	tenLHP nvarchar(30),
 	tenHP nvarchar(30), 
 )
+go
 create table GIAOVIEN
 (
 	maGV varchar(30) NOT NULL primary key,
 	hotenGV nvarchar(30),
 	ngaysinhGV date,
-	gioitinhGV nvarchar(10),
+	gioitinhGV nvarchar(3)check(gioitinhGV in('Nam',N'Nữ')),
 	diachiGV nvarchar(30),	
 )
+go
 create table LICHTHUCHANH
 (
 	maLTH varchar(30) NOT NULL primary key,
 	ngayTH date,
 	noidungTH nvarchar(30),
 )
-create table CT_LICHTHUCHANH
+go
+create table CT_THUCHANH
 (
 	maLTH varchar(30) NOT NULL,
 	maNV varchar(30) NOT NULL,
@@ -77,7 +79,7 @@ create table CT_LICHTHUCHANH
 	constraint CTLTH_LICHTHUCHANH_FK foreign key(maLTH) references LICHTHUCHANH(maLTH),
 	constraint CTLTH_GIAOVIEN_FK foreign key(maGV) references GIAOVIEN(maGV)
 )
-
+go
 create table CT_HOCPHAN
 (
 	maLHP varchar(30) NOT NULL,
@@ -90,17 +92,16 @@ create table CT_HOCPHAN
 	constraint CTHP_LOPHOCPHAN_FK foreign key(maLHP) references LOPHOCPHAN(maLHP),
 	constraint CTHP_GIAOVIEN_FK foreign key(maGV) references GIAOVIEN(maGV),
 	constraint CTHP_SINHVIEN_FK foreign key(maSV) references SINHVIEN(maSV)
-
-
 )
+go
 
 ----------------------------------------------------------------------
 
 /*DATA*/
 -----------------------------------------------
 --PHONGMAY--
-insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'TẦNG 1','2020-05-13',N'CA 01')
-insert into PHONGMAY values ('PM02',N'PHÒNG MÁY 02',N'TẦNG 2','2020-05-13',N'CA 02')
+insert into PHONGMAY values ('PM01',N'PHÒNG MÁY 01',N'TẦNG 1')
+insert into PHONGMAY values ('PM02',N'PHÒNG MÁY 02',N'TẦNG 2')
 --MAYTINH--
 insert into MAYTINH values ('M01',N'MÁY 01','2018-12-21',N'TỐT','PM01')
 insert into MAYTINH values ('M02',N'MÁY 02','2018-01-11',N'TỐT','PM01')
@@ -125,11 +126,11 @@ insert into MAYTINH values ('M020',N'MÁY 20','2018-05-13',N'LỖI PHẦN MỀM'
 
 --NHANVIEN--
 INSERT INTO NHANVIEN
-VALUES('NV01',N'Nuyễn Thị Trang','1987-4-4',N'Nữ',N'Hà Nội','PM01')
+VALUES('NV01',N'Nguyễn Thị Trang','1987-4-4',N'Nữ',N'Hà Nội','PM01')
 INSERT INTO NHANVIEN
 VALUES('NV02',N'Nguyễn Thanh Thảo','1987-11-1',N'Nữ',N'Hà Nội','PM02')
-
-
+INSERT INTO NHANVIEN
+VALUES('NV03',N'Trần Lâm Huỳnh','1977-10-1',N'Nam',N'Hà Tĩnh','PM02')
 
 --LOPHOCPHAN--
 INSERT INTO LOPHOCPHAN
@@ -247,7 +248,8 @@ INSERT INTO GIAOVIEN
 VALUES('GV05',N'Nguyễn Thế Vũ','1998-9-9',N'Nam',N'Ninh Bình')
 INSERT INTO GIAOVIEN
 VALUES('GV06',N'Phan Ngọc Huy','1987-4-4',N'Nam',N'Hà Nội')
-/*Sủa phần này*/
+INSERT INTO GIAOVIEN
+VALUES('GV07',N'Đinh Thu Trà','1987-9-4',N'Nữ',N'Hà Nội')
 --CT_HOCPHAN--
 INSERT INTO CT_HOCPHAN
 VALUES ('LHP01','GV01','SV01','KL1',N'Nguyễn Tuấn Anh',N'Nguyễn Thị Nhạn')
@@ -280,10 +282,6 @@ VALUES ('LHP05','GV03','SV07','CD1',N'Phạm Văn Hoàng',N'Nguyễn Thanh Tùng
 INSERT INTO CT_HOCPHAN
 VALUES ('LHP05','GV03','SV09','CD1',N'Phạm Văn Hoàng',N'Hoàng Ngọc Kim Oanh')
 
-
-
-
-
 --LICHTHUCHANH--
 INSERT INTO LICHTHUCHANH 
 values('TH1','2020-4-4',N'Bài Tập Thực Hành 1')
@@ -293,13 +291,13 @@ INSERT INTO LICHTHUCHANH
 values('TH3','2020-4-4',N'Bài Tập Thực Hành 3')
 
 
-/*ủa phần này*/ 
---CT_LICHTHUCHANH--
-INSERT INTO CT_LICHTHUCHANH 
+ 
+--CT_THUCHANH--
+INSERT INTO CT_THUCHANH 
 values('TH1','NV01','GV01','2020-4-4',N'Nuyễn Thị Trang',N'Nguyễn Tuấn Anh','Ca 1','07:00:00','09:30:00')
-INSERT INTO CT_LICHTHUCHANH 
+INSERT INTO CT_THUCHANH 
 values('TH2','NV01','GV02','2020-4-4',N'Nuyễn Thị Trang',N'Trần Thành Đạt','Ca 1','07:00:00','09:30:00')
-INSERT INTO CT_LICHTHUCHANH 
+INSERT INTO CT_THUCHANH 
 values('TH3','NV02','GV03','2020-4-4',N'Nguyễn Thanh Thảo',N'Phạm Văn Hoàng','Ca 2','09:30:00','12:00:00')
 
 
@@ -307,18 +305,35 @@ values('TH3','NV02','GV03','2020-4-4',N'Nguyễn Thanh Thảo',N'Phạm Văn Ho�
 
 ---------------------------------------------------------------------------------------------
 ---KHAI THAC DU LIEU---
+----Nguyễn Đức Trung----
 --In ra nhung hoc sinh den tu HN--
 SELECT* FROM SINHVIEN WHERE diachiSV =N'Hà Nội'
 --In ra nhung hoc sinh hoc lop Ky thuat lap trinh KL1--
 SELECT SINHVIEN.hotenSV FROM SINHVIEN,CT_HOCPHAN,LOPHOCPHAN
 WHERE CT_HOCPHAN.maLHP = LOPHOCPHAN.maLHP AND LOPHOCPHAN.tenLHP = 'KL1' AND  CT_HOCPHAN.maSV = SINHVIEN.maSV
---In ra nhung hoc sinh hoc lop hoc cua hoc sinh ten Nguyen Thi Nhan--
+--In ra nhung hoc phan cua hoc sinh ten Nguyen Thi Nhan--
 SELECT LOPHOCPHAN.tenLHP,LOPHOCPHAN.tenHP FROM SINHVIEN,CT_HOCPHAN,LOPHOCPHAN
 WHERE CT_HOCPHAN.maLHP = LOPHOCPHAN.maLHP AND CT_HOCPHAN.maSV = SINHVIEN.maSV AND SINHVIEN.hotenSV = N'Nguyễn Thị Nhạn'
 -----------------------------------------------
 
+--------------View------------------
+----Nguyễn Đức Trung----
+----Trần thành Đạt---
+CREATE VIEW giaovien_view
+AS
+SELECT hotenGV, maGV
+FROM dbo.GIAOVIEN
+WHERE diachiGV =N'Hà Nội' and gioitinhGV =N'Nữ'
+GO 
+SELECT *
+FROM DBO.giaovien_view
+GO
+DROP VIEW giaovien_view
+------------------------------------
 /*T-SQL*/
+----Nguyễn Đức Trung----
 
+----Trần Thành Đạt----
 
 /*DROP DATABASE*/
 use master
