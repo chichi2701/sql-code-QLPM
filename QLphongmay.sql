@@ -296,7 +296,7 @@ values('TH3','2020-4-4',N'Bài Tập Thực Hành 3')
 INSERT INTO CT_THUCHANH 
 values('TH1','NV01','GV01','2020-4-4',N'Nuyễn Thị Trang',N'Nguyễn Tuấn Anh','Ca 1','07:00:00','09:30:00')
 INSERT INTO CT_THUCHANH 
-values('TH2','NV01','GV02','2020-4-4',N'Nuyễn Thị Trang',N'Trần Thành Đạt','Ca 1','07:00:00','09:30:00')
+values('TH2','NV01','GV02','2020-4-5',N'Nuyễn Thị Trang',N'Trần Thành Đạt','Ca 1','07:00:00','09:30:00')
 INSERT INTO CT_THUCHANH 
 values('TH3','NV02','GV03','2020-4-4',N'Nguyễn Thanh Thảo',N'Phạm Văn Hoàng','Ca 2','09:30:00','12:00:00')
 
@@ -306,35 +306,140 @@ values('TH3','NV02','GV03','2020-4-4',N'Nguyễn Thanh Thảo',N'Phạm Văn Ho�
 ---------------------------------------------------------------------------------------------
 ---KHAI THAC DU LIEU---
 ----Nguyễn Đức Trung----
---In ra nhung hoc sinh den tu HN--
+--In ra nhung sinh vien den tu HN--
 SELECT* FROM SINHVIEN WHERE diachiSV =N'Hà Nội'
---In ra nhung hoc sinh hoc lop Ky thuat lap trinh KL1--
+--In ra nhung sinh vien hoc lop Ky thuat lap trinh KL1--
 SELECT SINHVIEN.hotenSV FROM SINHVIEN,CT_HOCPHAN,LOPHOCPHAN
 WHERE CT_HOCPHAN.maLHP = LOPHOCPHAN.maLHP AND LOPHOCPHAN.tenLHP = 'KL1' AND  CT_HOCPHAN.maSV = SINHVIEN.maSV
---In ra nhung hoc phan cua hoc sinh ten Nguyen Thi Nhan--
+--In ra nhung sinh vien hoc lop hoc cua hoc sinh ten Nguyen Thi Nhan--
 SELECT LOPHOCPHAN.tenLHP,LOPHOCPHAN.tenHP FROM SINHVIEN,CT_HOCPHAN,LOPHOCPHAN
 WHERE CT_HOCPHAN.maLHP = LOPHOCPHAN.maLHP AND CT_HOCPHAN.maSV = SINHVIEN.maSV AND SINHVIEN.hotenSV = N'Nguyễn Thị Nhạn'
+--In ra man hinh nhung sinh vien co lich thuc hanh Ca 2--
+SELECT SINHVIEN.hotenSV FROM SINHVIEN,CT_HOCPHAN,GIAOVIEN, CT_THUCHANH
+WHERE SINHVIEN.maSV = CT_HOCPHAN.maSV AND CT_HOCPHAN.maGV = GIAOVIEN.maGV AND GIAOVIEN.maGV = CT_THUCHANH.maGV AND CT_THUCHANH.ca = 'Ca 2'
+--In ra man hinh so luong sinh vien thuc hanh Ca 1--
+SELECT Count(SINHVIEN.hotenSV) AS "Số lượng sinh viên" FROM SINHVIEN,CT_HOCPHAN,GIAOVIEN, CT_THUCHANH
+WHERE SINHVIEN.maSV = CT_HOCPHAN.maSV AND CT_HOCPHAN.maGV = GIAOVIEN.maGV AND GIAOVIEN.maGV = CT_THUCHANH.maGV AND CT_THUCHANH.ca = 'Ca 1'
+--In ra số sinh viên thực hành cả 2 Ca--
+SELECT SINHVIEN.hotenSV FROM SINHVIEN,CT_HOCPHAN,GIAOVIEN, CT_THUCHANH
+WHERE SINHVIEN.maSV = CT_HOCPHAN.maSV AND CT_HOCPHAN.maGV = GIAOVIEN.maGV AND GIAOVIEN.maGV = CT_THUCHANH.maGV AND CT_THUCHANH.ca = 'Ca 2'  AND CT_LICHTHUCHANH.ca = 'Ca 1'
+
+----Trần Thành Đạt----
+
+
+----Đinh Tiến Dũng----
+--In ra những máy tính và tình trạng máy ở Phòng máy 1=--
+SELECT MAYTINH.tenMT,MAYTINH.tinhtrang FROM MAYTINH,PHONGMAY
+WHERE PHONGMAY.maPM = MAYTINH.maPM and MAYTINH.maPM ='PM01'
+--In ra những máy tính bị lỗi phần mềm--
+SELECT MAYTINH.maMT, MAYTINH.tenMT FROM MAYTINH
+WHERE MAYTINH.tinhtrang = N'LỖI PHẦN MỀM'
+--Đếm số lượng máy tính tình trạng TỐT ở Phòng máy 2--
+SELECT Count(MAYTINH.maMT) AS "Số lượng máy tốt"  FROM MAYTINH,PHONGMAY
+WHERE MAYTINH.tinhtrang = N'TỐT' AND MAYTINH.maPM ='PM02' AND MAYTINH.maPM=PHONGMAY.maPM
 -----------------------------------------------
 
 --------------View------------------
 ----Nguyễn Đức Trung----
-----Trần thành Đạt---
-CREATE VIEW giaovien_view
+--Tạo View xem những sinh viên học môn "TT Kỹ thuật lập trình"--
+create view SVKL AS
+SELECT SINHVIEN.hotenSV AS "Sinh viên học môn TTKTLT" FROM SINHVIEN,CT_HOCPHAN,LOPHOCPHAN
+WHERE SINHVIEN.maSV = CT_HOCPHAN.MASV AND  CT_HOCPHAN.maLHP = LOPHOCPHAN.maLHP AND LOPHOCPHAN.tenHP = N'Thực Tập Kỹ Thuật Lập Trình'
+go
+select * from SVKL
+
+drop view SVKL
+--Tạo View xem số lượng sinh viên học môn "TT Cơ sở dữ liệu"--
+create view SVCD AS
+SELECT Count(SINHVIEN.maSV) AS "Số lượng sinh viên học TTCSDL"  FROM SINHVIEN,CT_HOCPHAN,LOPHOCPHAN
+WHERE SINHVIEN.maSV = CT_HOCPHAN.MASV AND  CT_HOCPHAN.maLHP = LOPHOCPHAN.maLHP AND LOPHOCPHAN.tenHP = N'Thực Tập Cơ Sở Dữ Liệu'
+go
+select * from SVCD
+
+drop view SVCD
+--Tạo View xem thông tin những lớp đã có học sinh đăng ký học--
+create view DSL AS
+SELECT LOPHOCPHAN.maLHP, LOPHOCPHAN.tenHP, LOPHOCPHAN.tenLHP FROM LOPHOCPHAN, CT_HOCPHAN
+WHERE LOPHOCPHAN.maLHP = CT_HOCPHAN.maLHP AND CT_HOCPHAN.maSV IS not NULL
+go
+select * from DSL
+
+drop view DSL
+
+----Trần Thành Đạt----
+--Tạo view xem nội dụng ca 1 lịch thực hành--
+CREATE VIEW noidungthuchanh_ca1
 AS
-SELECT hotenGV, maGV
-FROM dbo.GIAOVIEN
-WHERE diachiGV =N'Hà Nội' and gioitinhGV =N'Nữ'
+SELECT LTH.noidungTH as N'Nội dung',CT.ca as N'Ca thực hành'
+FROM LICHTHUCHANH as LTH, CT_THUCHANH as CT
+WHERE CT.maLTH=LTH.maLTH and CT.ca = 'Ca 1'
 GO 
-SELECT *
-FROM DBO.giaovien_view
-GO
-DROP VIEW giaovien_view
+SELECT * FROM noidungthuchanh_ca1
+
+DROP VIEW noidungthuchanh_ca1
+--d--
+
+
+----Đinh Tiến Dũng----
+--TẠO VIEW XEM SỐ LƯỢNG TẤT CẢ MÁY TÍNH TÌNH TRẠNG TỐT--
+create view SOLUONGMAYTOT AS
+SELECT Count(MAYTINH.maMT) AS "Số lượng máy tốt" FROM MAYTINH
+WHERE MAYTINH.tinhtrang = N'TỐT'
+go
+select * from SOLUONGMAYTOT
+
+drop view SOLUONGMAYTOT
+
+--TẠO VIEW XEM SỐ LƯỢNG TẤT CẢ MÁY TÍNH TÌNH TRẠNG MÁY PHÒNG 2--
+create view MAYPHONG2 AS
+SELECT MAYTINH.tenMT,MAYTINH.tinhtrang FROM MAYTINH,PHONGMAY
+WHERE PHONGMAY.maPM = MAYTINH.maPM and MAYTINH.maPM ='PM02'
+go
+select * from MAYPHONG2
+
+drop view MAYPHONG2
+--TẠO VIEW XEM THÔNG TIN NHỮNG MÁY NHẬP NGÀY 13/5/2018--
+create view MAYNHAP AS
+SELECT MAYTINH.maMT,MAYTINH.tenMT,MAYTINH.tinhtrang FROM MAYTINH
+WHERE MAYTINH.ngaynhap= '2018-05-13'
+go
+select * from MAYNHAP
+
+drop view MAYNHAP
 ------------------------------------
 /*T-SQL*/
 ----Nguyễn Đức Trung----
 
 ----Trần Thành Đạt----
 
+----Đinh Tiến Dũng----
+---Xem thông tin máy tính theo phòng---
+create proc Xem_MT_Theo_Phong
+@maPM varchar(30)
+AS
+SELECT* FROM MAYTINH,PHONGMAY
+WHERE MAYTINH.maPM=PHONGMAY.maPM and PHONGMAY.maPM=@maPM
+Xem_MT_Theo_Phong PM02
+drop proc Xem_MT_Theo_Phong
+--Thêm máy tính--
+create proc Them_MT
+    @maMT varchar(30),
+	@tenMT nvarchar(30),
+	@ngaynhap date,
+	@tinhtrang nvarchar(30),
+	@maPM varchar(30)
+	as
+insert into MAYTINH values(@maMT,@tenMT,@ngaynhap,@tinhtrang,@maPM)
+Them_MT 'M30',N'MÁY 30','2020-3-3',N'TỐT','PM02'
+drop proc Them_MT
+--Xem thông tin máy nhập năm thời gian--
+create proc xem_may_theo_time
+@ngaynhap date 
+as
+select* from MAYTINH
+where MAYTINH.ngaynhap=@ngaynhap 
+xem_may_theo_time '2018-05-13'
+drop proc xem_may_theo_time
 /*DROP DATABASE*/
 use master
 drop database QLPhongMay
