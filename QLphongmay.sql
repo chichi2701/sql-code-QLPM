@@ -409,7 +409,40 @@ drop view MAYNHAP
 ------------------------------------
 /*T-SQL*/
 ----Nguyễn Đức Trung----
+--Thủ tục xem thông tin sinh viên theo MSV--
+create proc Xem_SV_Theo_MaSV
+@maSV varchar(30)
+as select * from SINHVIEN
+WHERE maSV =@maSV
 
+Xem_SV_Theo_MaSV SV01
+
+drop proc Xem_SV_Theo_MaSV 
+
+--Thủ tục xem sinh viên--
+create proc Them_SV
+@maSV varchar(30),
+@hotenSV nvarchar(30),
+@ngaysinhSV date,
+@gioitinhSV nvarchar(10),
+@diachiSV nvarchar(30)
+as
+insert into SINHVIEN values(@maSV,@hotenSV,@ngaysinhSV,@gioitinhSV,@diachiSV)
+
+Them_SV SV21,N'Ngô Hoàng Việt','1998-3-2','Nam',N'Hà Nội'
+
+drop proc Them_SV
+
+--Xem số lượng sinh viên theo môn học--
+create proc soluongsinhvien
+@maLHP varchar(30)
+as
+select count(SINHVIEN.maSV) as 'Số lượng sinh viên' from SINHVIEN, CT_HOCPHAN
+where SINHVIEN.maSV = CT_HOCPHAN.maSV and CT_HOCPHAN.maLHP = @maLHP
+
+soluongsinhvien LHP05
+
+drop proc soluongsinhvien
 ----Trần Thành Đạt----
 
 ----Đinh Tiến Dũng----
